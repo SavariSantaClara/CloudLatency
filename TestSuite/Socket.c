@@ -38,7 +38,7 @@ int create_client_socket (char *hostname, int port, SOCK_TYPE_T type, struct soc
     memset (serveraddr, 0x00, sizeof(struct sockaddr_in));
     serveraddr->sin_family = AF_INET;
     serveraddr->sin_port = htons(port);
-    memcpy (server->h_addr, &serveraddr->sin_addr.s_addr, server->h_length);
+    memcpy (&serveraddr->sin_addr.s_addr, server->h_addr, server->h_length);
    
     if (type == SOCK_TCP)
     { 
