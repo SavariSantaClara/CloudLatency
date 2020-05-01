@@ -76,7 +76,7 @@ int main(int argc, char **argv) {
 
     /* check command line arguments */
     if (argc != 5) {
-       fprintf(stderr,"usage: %s <hostname> <port> <number_of_pkts> <pkt size (1- 1024)>\n", argv[0]);
+       fprintf(stderr,"usage: %s <hostname> <port> <number_of_pkts> <pkt size (1- 4096)>\n", argv[0]);
        exit(0);
     }
     hostname = argv[1];

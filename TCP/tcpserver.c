@@ -14,7 +14,7 @@
 #include <arpa/inet.h>
 #include <pthread.h>
 
-#define BUFSIZE 1024
+#define BUFSIZE 4096
 #define MAX_QUEUE 15
 
 /*

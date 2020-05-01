@@ -121,13 +121,16 @@ int client_connect(struct mosquitto *mosq, struct mosq_config *cfg)
 int client_opts_set(struct mosquitto *mosq, struct mosq_config *cfg)
 {
     printf ("Entering %s:%d\n", __func__, __LINE__);
-	if((cfg->cafile || cfg->capath)
-			&& mosquitto_tls_set(mosq, cfg->cafile, cfg->capath, cfg->certfile, cfg->prvkeyfile, NULL))
-    { 
-		printf("Error: Problem setting TLS options.\n");
-		mosquitto_lib_cleanup();
-		return 1;
-	}
+	if (cfg->port == MQTT_SEC_PORT)
+    {
+        if((cfg->cafile || cfg->capath)
+	    		&& mosquitto_tls_set(mosq, cfg->cafile, cfg->capath, cfg->certfile, cfg->prvkeyfile, NULL))
+        { 
+	    	printf("Error: Problem setting TLS options.\n");
+	    	mosquitto_lib_cleanup();
+	    	return 1;
+	    }
+    }
 	mosquitto_opts_set(mosq, MOSQ_OPT_PROTOCOL_VERSION, &(cfg->protocol_version));
     printf ("Exiting %s:%d\n", __func__, __LINE__);
 	return MOSQ_ERR_SUCCESS;
@@ -137,7 +140,7 @@ void init_mqtt_client_params (mosq_config_t *cfg, char *hostname, int num_pkts, 
 {
     printf ("Entering %s:%d\n", __func__, __LINE__);
 	memset(cfg, 0, sizeof(mosq_config_t));
-	cfg->port = MQTT_SEC_PORT;
+	cfg->port = MQTT_UNSEC_PORT;
 	strcpy (cfg->id, CLI_ID);
 	cfg->protocol_version = MQTT_PROTOCOL_V31;
     //a2zacfu9uv98fr-ats.iot.us-west-2.amazonaws.com

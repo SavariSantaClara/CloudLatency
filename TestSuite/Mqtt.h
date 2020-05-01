@@ -17,6 +17,7 @@
 #define ROOTCA "tls_certs/rootca.pem"
 #define CLI_ID "latency_testing"
 #define MQTT_SEC_PORT 8883
+#define MQTT_UNSEC_PORT 1883
 
 typedef struct mosq_config {
     char id[MAX_ARR_SIZE];
